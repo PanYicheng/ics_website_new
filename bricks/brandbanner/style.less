@@ -1,0 +1,39 @@
+@import "../styles/variables";
+@import "../styles/mixins";
+
+&{
+  background: white;
+}
+
+.banner{
+  padding: 30px 0;
+  background: url('/img/home/shuimo.jpg');
+  overflow: hidden;
+  background-size: cover;
+  img{
+    float: left;
+    height: 72px;
+    margin-right: 25px;
+  }
+  .title{
+    //text-shadow: 0 1px 0 #eee;
+    font-size: 22px;
+    line-height: 1;
+    margin-top: 11px;
+    .zh a, .en a{
+      color: @primary;
+    }
+    .zh{
+      margin: 0 0 10px 0;
+      font-family: "Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+    }
+    .en{
+      margin: 0;
+      color: @primary;
+      font-size: 18px;
+      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+  }
+}
+
+

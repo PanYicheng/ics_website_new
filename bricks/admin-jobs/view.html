@@ -1,0 +1,41 @@
+{% layout 'admin-layout' %}
+
+<div>
+  <div class="page-header">
+    <h3>岗位管理</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>类别</th>
+          <th>标题</th>
+          <th>摘要</th>
+          <th>创建者</th>
+          <th>创建日期</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {%for job in jobs %}
+        <tr>
+          <td>{{job.type}}</td>
+          <td>{{job.title}}</td>
+          <td>{{job.content | strip_html | truncate: 10}}</td>
+          <td>{{job.creator.name}}</td>
+          <td>{{job.createdTime | date: '%Y-%m-%d'}}</td>
+          <td>
+            <a class="btn btn-xs btn-default" 
+              href="/admin/jobs/{{job.id}}/edit">
+              修改
+            </a>
+            <a class="btn btn-xs btn-primary btn-delete" data-id="{{job.id}}">
+              删除
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+</div>

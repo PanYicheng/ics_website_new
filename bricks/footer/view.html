@@ -1,0 +1,40 @@
+<footer>
+  <section class="title">
+    <p>北京大学 · 智能计算与感知实验室</p>
+    <section class="list-unstyled friend-link">
+        <a href="http://www.pku.edu.cn/">北京大学</a>
+        <a href="http://eecs.pku.edu.cn">信息科学与技术学院</a>
+        <a href="http://se.pku.edu.cn">软件工程国家工程中心</a>
+        <a href="#http://www.ss.pku.edu.cn/">软件与微电子学院</a>
+        <a href="http://www.ece.pku.edu.cn/">信息工程学院</a>
+        <a href="http://psu.edu/">宾州州立大学</a>
+    </section>
+  </section>
+  <section class="credit-bar">
+    <div class="container">
+      <span>Copyright @ 2016 智能计算与感知实验室</span> 
+      |
+      <span>地址：北京市海淀区颐和园路5号理科一号楼1800</span>
+      |
+      <span>邮编：100871</span>
+    </div>
+  </section>
+</footer>
+
+<style>
+  .container{
+    word-wrap: break-word;
+  }
+</style>
+
+{% if config.env == 'production' %}
+<script src="/site.min.js"></script>
+{% endif %}
+
+{% if config.env == 'development' %}
+<script src="/site.js"></script>
+<script type="text/async-script" 
+  data-src="//{{config.server.host}}:{{config.livereload}}/livereload.js">
+</script>
+{% endif %}
+

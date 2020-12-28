@@ -1,0 +1,58 @@
+{% layout 'default-layout'%}
+
+<div class="include">
+
+  {% include 'navbar' %}
+ 
+  <div class="container" style="width: 1000px;margin-top:30px;background:white;">
+
+    <!-- 新建滚动新闻 -->
+    <div class="sec" style="height: 500px;padding: 0 10px;">
+      <div >
+        {% include "home-news" %}
+      </div>
+    </div>
+
+
+    <!-- 左侧通知通告 右侧行业新闻 -->
+    <div class="sec" style="height: 400px;padding:0 10px;">
+      <div style="width: 465px;float: left;">
+          {% include "home-notices" %}
+      </div>
+
+      <div style="width: 465px;float: right;">
+        {% include "home-news2" %}
+      </div>
+    </div>
+
+    <div class="sec" style="height: 200px;padding:0 10px; clear: both;">
+      <div class="row" style="width: 465px;float: left;">
+        <div  > 
+          {% include "home-research" %}
+        </div>
+      </div>
+      <div style="width: 465px;float: right;">
+          {% include "home-lab" %}
+      </div>   
+    </div>
+  
+    <div class="sec" style="height: 400px;padding:0 10px; clear: both">
+
+      <!-- <div style="width: 465px;float: left;">
+        {% include "home-recruit" %}
+      </div> -->
+      <div class="row" style="width: 465px;float: left;">
+        <div  > 
+          {% include "home-recruit" %}
+        </div>
+      </div>
+      <div style="width: 465px;float: right;">
+          {% include "home-download-test" %}
+      </div>
+    </div>
+
+
+
+
+  </div>
+</div>

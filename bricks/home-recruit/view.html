@@ -1,0 +1,19 @@
+<div>
+  <div >
+  <header class="block-header">
+    <a href="/job">项目展示</a>
+    <a class="more active" href="/job">更多 &gt;</a>
+  </header>
+
+  <ul class="list-unstyled" >
+    {% for job in list1 %}
+    <li>
+      <a class="title" href="/job/{{job.id}}" title="{{job.title}}">
+        {{job.title}}</a>
+      <time>{{job.createdTime | date: "%Y-%m-%d"}}</time>
+    </li>
+    {% endfor %}
+  </ul>
+  </div>
+
+</div>

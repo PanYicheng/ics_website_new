@@ -1,0 +1,21 @@
+<div style="width:950px;">
+  <header class="block-header" style="width:950px;">
+    <a href="/news">新闻动态</a>
+    <a class="more active" href="/news">更多 &gt;</a>
+  </header>
+
+  <div style="width: 465px;float: left;">
+    {% include "carousel" %}
+  </div>
+  <div style="width: 465px;float: right;margin-top:10px;">
+    <ul class="list-unstyled">
+      {% for news in list1 %}
+      <li>
+        <a class="title" href="/news/{{news.id}}" title="{{news.title}}">
+          {{news.title}}</a>
+        <time>{{news.createdTime | date: "%Y-%m-%d"}}</time>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<nav class="navbar navbar-inverse">
+  <div class="container" style="background-color: #5A0008;">
+    <ul class="nav navbar-nav">
+      <li><a href="/" style="font-size: 14px;">首页</a></li>
+      <li><a href="//www.pku.edu.cn" style="font-size: 14px;">北京大学</a></li>
+      <li><a href="//its.pku.edu.cn" style="font-size: 14px;">网络服务</a></li>
+      <li><a href="//mail.pku.edu.cn" style="font-size: 14px;">邮件系统</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">      
+      {% if user %}
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 14px;">
+          {{user.name}} <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/admin">管理页面</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="/logout">退出登录</a></li>
+        </ul>
+      </li>
+      {% else %}
+      <li><a href="/login" style="font-size: 14px;">登录</a></li>
+      {% endif %}
+      <li class="dropdown">
+        <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          链接 <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="http://www.ece.pku.edu.cn/">信息工程学院</a></li>
+          <li><a href="http://eecs.pku.edu.cn/">信息科学与技术学院</a></li>
+          <li><a href="http://www.ss.pku.edu.cn/">软件与微电子学院</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="/login">管理员登录</a></li>
+        </ul>-->
+        <a href="#" style="font-size: 14px;">English</a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,18 @@
+[Unit]
+Description=lab website(ics.pku.edu.cn)
+Requires=mongodb.service redis.service
+Wants=network-online.target
+After=mongodb.service redis.service network-online.target
+
+[Service]
+WorkingDirectory=/home/ics/ics-website
+ExecStart=/usr/bin/node bin/www
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=lab-website
+User=ics
+Group=ics
+ 
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,50 @@
+{% layout 'default-layout'%}
+
+<div>
+  <link rel="stylesheet" href="/lib/simditor/styles/simditor.css">
+
+  <div class="container">
+
+    <div class="layout-wrapper">
+      <div class="left panel">
+        <div class="nav-block">
+          <header>内容管理</header>
+          <ul>
+            <li class="{{articleActive}}">
+              <a href="/admin/articles">文章管理</a>
+            </li>
+            <li class="{{editArticleActive}}">
+              <a href="/admin/create-article">创建文章</a>
+            </li>
+            <li class="{{jobActive}}">
+                <a href="/admin/jobs">岗位管理</a>
+              </li>
+              <li class="{{editJobActive}}">
+                <a href="/admin/create-job">创建岗位</a>
+              </li>
+            <li class="{{fileActive}}">
+              <a href="/admin/files">文件管理</a>
+            </li>
+          </ul>
+        </div>
+        <div class="nav-block">
+          <header>网站维护</header>
+          <ul>
+            <li class="{{userActive}}">
+              <a href="/admin/users">管理员管理</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="right panel">
+        {% block %}
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/lib/simditor/scripts/module.min.js"></script>
+  <script src="/lib/simditor/scripts/hotkeys.min.js"></script>
+  <script src="/lib/simditor/scripts/uploader.min.js"></script>
+  <script src="/lib/simditor/scripts/simditor.js"></script>
+</div>

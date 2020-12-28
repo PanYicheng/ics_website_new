@@ -1,0 +1,84 @@
+@import "../styles/variables";
+
+&{
+  overflow: hidden;
+}
+ul{
+  margin: 0;
+  font-size: 0;
+}
+
+ul.nav-all>li{
+  display: inline-block;
+  padding: 13px 0;
+  width: 16.66%;
+  text-align: center;
+  .subnav{
+    // display: none;
+    opacity: 0;
+
+    position: absolute;
+    padding: 13px;
+    z-index: 1000;
+    background: @primary;
+    text-align: center;
+
+    -webkit-transition: opacity .25s ease .1s;
+    -moz-transition: opacity .25s ease .1s;
+    -o-transition: opacity .25s ease .1s;
+    -ms-transition: opacity .25s ease .1s;
+    transition: opacity .25s ease .1s;
+
+    @media (min-width: 768px) {
+      // @container : 750px;  
+      width:680px/6;
+    }
+    @media (min-width: 992px) {
+        // @container : 970px; 
+        width:900px/6; 
+    }
+    @media (min-width: 1200px) {
+        // @container : 1170px;  
+        width:930px/6;
+    }
+    li{
+      // display: block;
+      // padding: 13px 0 13px 0;
+      width:100%;
+
+      height: 0;
+      overflow: hidden;
+      padding: 0;
+      -webkit-transition: height .25s ease .1s;
+      -moz-transition: height .25s ease .1s;
+      -o-transition: height .25s ease .1s;
+      -ms-transition: height .25s ease .1s;
+      transition: height .25s ease .1s;
+    }
+  }
+}
+ul.nav-all>li:hover{
+  .subnav{
+    // display: block;
+    opacity: 1;
+
+    li{
+      height: 40px;
+      overflow: visible;
+      padding: 0;
+    }
+  }
+}
+.nav-all>li:hover, .nav-all>li.active{
+  background: @primary;
+  a, a:hover, a:focus, a.active, a:active{
+    color: white;
+  }
+}
+a{
+  font-size: 15px;
+  color: #333;
+}
+
+
+

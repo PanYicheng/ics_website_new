@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include 'head' %}
+  <title>{{title}}</title>
+</head>
+
+<body>
+
+  {% include 'sitenav' %}
+  {% include "brandbanner" %}
+  <div class="theblock">
+  {% block %}
+  </div>
+  {% include 'footer' %}
+</body>
+
+</html>

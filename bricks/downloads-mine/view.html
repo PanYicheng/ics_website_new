@@ -1,0 +1,61 @@
+{% layout 'downloads-layout'%}
+
+
+<div class="">
+        <form method="post" class="up-file" enctype="multipart/form-data" id="frmUploadFile">
+            <input id="infile" type="file" accept="application/pdf" name="file" style="display:none;">
+            <div class="input-append">
+              <a class="btn btn-default" id="browse" onclick="$('input[id=infile]').click();">浏览文件</a>
+              <input id="fileCover" class="input-large " type="text" >
+              <input type="date" name="fileDate">
+            </div>
+      
+            <div class="form-group">
+              <label for="type" class="control-label">资料类型</label>
+              <select class="form-control" name="type" id="type">
+                <option value="papers">
+                  论文
+                </option>
+                <option value="others">
+                  其他
+                </option>
+              </select>
+            </div>
+      
+            <button type="button" class="btn  btn-success btn-upload">上传文件</button>
+        </form>
+          <div hidden id="userid" class={{req.user.id}}></div>
+          <table class="table">
+            <thead>
+            <tr>
+              <th class="file-name">文件名</th>
+              <!-- <th>文件大小</th> -->
+              <th>文件日期</th>
+              <th>上传人</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+      
+            <tbody>
+            {%for file in files %}
+            
+            <tr>
+              <td class="file-name">{{file.originalname}}{{file.size|size}}</td>
+              <!-- <td>{{file.size|divided_by:1024|append:'K'}}</td> -->
+              <td>{{file.fileDate | date: '%Y-%m-%d'}}</td>
+              <td>{{file.creator.name}}</td>
+              <td>
+                <a class="btn btn-xs btn-default btn-down" data-id="{{file.id}}"
+                   href="/upload/{{file.filename}}">
+                  下载
+                </a>
+                <a class="btn btn-xs btn-primary btn-delete" data-id="{{file.id}}">
+                  删除
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+      
+          </table>
+</div>

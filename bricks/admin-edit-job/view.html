@@ -1,0 +1,45 @@
+{% layout 'admin-layout' editJobActive:'active' %}
+
+<div>
+  <div class="page-header">
+    <h3>
+      {% if job %} 编辑岗位 {% else %} 创建岗位 {% endif %}
+    </h3>
+  </div>
+
+  <form method="post">
+
+    {% if job %}
+      <input type="hidden" name="_method" value="PUT">
+    {% endif %}
+
+    <div class="form-group">
+      <label for="title" class="control-label">招聘标题</label>
+      <input type="text" class="form-control" name="title" id="title"
+        placeholder="岗位标题" value="{{job.title}}">
+    </div>
+
+    <div class="form-group">
+      <label for="type" class="control-label">岗位类型</label>
+      <select class="form-control" name="type" id="type">
+        <option value="State-owned" {%if job.type =='State-owned' %}selected{%endif%}>
+          国企
+        </option>
+        <option value="greate500" {%if job.type =='greate500' %}selected{%endif%}>
+          500强民企
+        </option>
+        <option value="Government-affiliated" {%if job.type =='Government-affiliated' %}selected{%endif%}>
+          事业单位
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="content" class="control-label">岗位内容</label>
+      <textarea class="form-control" name="content" id="content" rows="20" placeholder="岗位内容">{{job.content}}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">提交</button>
+  </form>
+
+</div>

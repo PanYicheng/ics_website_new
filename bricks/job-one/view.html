@@ -1,0 +1,20 @@
+{% layout 'default-layout'%}
+
+<div>
+
+  {% include 'navbar' %}
+
+  <div class="container">
+    <header class="page-header">
+      <time class="pull-right">
+        {{job.createdTime | date: "%Y-%m-%d"}}
+      </time>
+      <h4 class="article-title"> {{job.title}} </h4>
+    </header>
+
+    <section class="content">
+      {{job.content}}
+    </section>
+
+  </div>
+</div>

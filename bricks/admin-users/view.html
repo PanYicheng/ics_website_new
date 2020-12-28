@@ -1,0 +1,34 @@
+{% layout 'admin-layout' %}
+
+<div>
+  <div class="page-header">
+    <h3>用户管理</h3>
+
+
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th>姓名</th>
+        <th>用户名</th>
+        <th class="operations">操作</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      {%for user in users %}
+      <tr>
+        <td >{{user.name}}</td>
+        <td >{{user.username}}</td>
+        <td class="operations">
+          <a class="btn btn-xs btn-primary btn-delete" data-id="{{user.id}}">
+            删除
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+</div>

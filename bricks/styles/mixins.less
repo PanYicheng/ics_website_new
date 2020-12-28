@@ -1,0 +1,46 @@
+.hover-color(@normal, @hover){
+  color: @normal;
+  text-decoration: none;
+  &:hover{
+    color: @hover;
+    text-decoration: none;
+  }
+}
+.size(@width){
+  width: @width;
+  height: @width;
+}
+.circle(@width){
+  width: @width;
+  height: @width;
+  border-radius: @width/2;
+  line-height: @width;
+  text-align: center;
+}
+.active(@normal, @active){
+  color: @normal;
+  &:active, &.active, &:hover{
+    color: @active;
+    text-decoration: none;
+  }
+}
+.bg(@color){
+  background-color: @color;
+}
+.text(@color){
+  color: @color;
+}
+.line-clamp(@lines){
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: @lines;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+.ellipsis{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
