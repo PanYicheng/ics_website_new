@@ -11,7 +11,7 @@ exports.get = function(req, done, fail) {
     Article.find()
         .sort('-createdTime')
         .populate('creator')
-        .execAsync()    //执行上面的两步操�?
+        .execAsync()    //执行上面的两步操�?
         .then(articles => {     //把上面的结果进行回调到articles里面
             done({
                 articleActive: 'active',

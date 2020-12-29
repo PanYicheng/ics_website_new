@@ -12,7 +12,8 @@ exports.get = function(req, done, fail) {
         //.populate('creator')
         .sort('-fileDate')  
         .execAsync()
-        .then(files => {console.log(files);
+        .then(files => {
+            // console.log(files);
             done({
                 downloadsActive: 'active',
                 // downloads_openActive:'active',
