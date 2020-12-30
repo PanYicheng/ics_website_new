@@ -11,7 +11,7 @@ var FileSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    type:String,
+    type: String,
     creator: {
         type: String,
         ref: 'User',

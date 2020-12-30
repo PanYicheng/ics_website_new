@@ -8,7 +8,7 @@ exports.url = '/downloads-papers';
 exports.get = function(req, done, fail) {
     // if(!req.user) return fail(401);
     // find筛选
-    File.find({type: "papers"})
+    File.find({type: "papers", mimetype: "application/pdf"})
         //.populate('creator')
         .sort('-fileDate')
         .execAsync()

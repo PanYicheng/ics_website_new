@@ -4,11 +4,19 @@
   <div class="page-header">
     <h3>文章管理</h3>
     <table class="table">
+      <colgroup>
+        <col style="width:30%">
+        <col style="width:25%">
+        <col style="width:10%">
+        <col style="width:10%">
+        <col style="width:15%">
+        <col style="width:10%">
+      </colgroup>
       <thead>
         <tr>
-          <th>类别</th>
           <th>标题</th>
           <th>摘要</th>
+          <th>类别</th>
           <th>创建者</th>
           <th>创建日期</th>
           <th>操作</th>
@@ -18,9 +26,9 @@
       <tbody>
         {%for article in articles %}
         <tr>
-          <td>{{article.type}}</td>
           <td>{{article.title}}</td>
           <td>{{article.content | strip_html | truncate: 10}}</td>
+          <td>{{article.type}}</td>
           <td>{{article.creator.name}}</td>
           <td>{{article.createdTime | date: '%Y-%m-%d'}}</td>
           <td>
