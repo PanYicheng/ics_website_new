@@ -1,0 +1,24 @@
+{
+  "env": "development",
+  "server": {
+    "host": "localhost",
+    "port": 3008
+  },
+  "express": {
+    "host": "0.0.0.0",
+    "port": 3008
+  },
+  "mongodb": "mongodb://localhost/ics",
+  "redis": {
+    "host": "localhost",
+    "port": 6379
+  },
+  "livereload": 35748,
+  "admin": [
+    {
+        "name": "test",
+        "password": "test",
+        "username": "test"
+    } 
+  ]
+}
