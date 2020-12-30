@@ -10,7 +10,7 @@ exports.get = function(req, done, fail) {
     // find筛选
     File.find()
         //.populate('creator')
-        .sort('-fileDate')  
+        .sort('-fileDate -createdTime')
         .execAsync()
         .then(files => {
             // console.log(files);

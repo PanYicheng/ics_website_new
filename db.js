@@ -12,12 +12,12 @@ require('mongoose-query-paginate');
 db.on('error', e => {
     debug('connect error: ', e);
 });
-db.once('open', function() {
+db.once('open', function () {
     debug('connected');
 });
 
 if (config.mongodb) {
-    mongoose.connect(config.mongodb);
+    mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: true });
 } else {
     debug('config:mongodb not set');
 }

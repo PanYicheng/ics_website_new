@@ -3,6 +3,12 @@
 
 <div class="">
     <table class="table">
+        <colgroup>
+            <col style="width:50%">
+            <col style="width:15%">
+            <col style="width:20%">
+            <col style="width:15%">
+          </colgroup>
         <thead>
         <tr>
             <th class="file-name">文件名</th>
@@ -15,7 +21,7 @@
         <tbody>
         {%for file in files %}
         <tr>
-            <td class="file-name">{{file.originalname}}{{file.size|size}}</td>
+            <td class="file-name">{{file.originalname}}</td>
             <td>{{file.size|divided_by:1024|append:'K'}}</td>
             <td>{{file.fileDate | date: '%Y-%m-%d'}}</td>
             <td>

@@ -2,11 +2,11 @@
   "env": "development",
   "server": {
     "host": "ics.pku.edu.cn",
-    "port": 3008
+    "port": 3009
   },
   "express": {
     "host": "0.0.0.0",
-    "port": 3008
+    "port": 3009
   },
   "mongodb": "mongodb://localhost/ics",
   "redis": {
@@ -54,6 +54,11 @@
     "name": "姜欣睿",
     "username": "jiangxinrui",
     "password": "JiangXinRuiICS"
+  },
+  {
+    "name": "潘宜城",
+    "username": "pyc",
+    "password": "pyc@icslab"
   }]
 }
 
