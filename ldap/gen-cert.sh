@@ -1,3 +1,5 @@
+cd `dirname $0`
+
 openssl genrsa -out server-key.pem 2048
 openssl req -new -sha256 -key server-key.pem -out server-csr.pem #-config openssl.cnf
 openssl x509 -req -in server-csr.pem -signkey server-key.pem -out server-cert.pem #-extensions v3_req -extfile openssl.cnf

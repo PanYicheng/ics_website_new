@@ -18,9 +18,14 @@ db.once('open', function() {
 
     User.removeAsync({})
         .then(x => BPromise.all(admins))
-        .map(user => User.registerAsync(
+      /*  .map(user => User.registerAsync(
             new User(_.omit(user, 'password')),
-            user.password))
+            user.password))*/
+        .map(user => {
+            user.dn = 'cn='+user.username+', ou=users, o=ics'
+            console.log(user)
+            return User.create(user)
+        })
         .then(function() {
             console.log(`${admins.length} users registered`);
         })
