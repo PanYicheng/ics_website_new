@@ -2,7 +2,7 @@ var $btnDelete = $(module.elements).find('.btn-delete');
 var $btnUpload = $(module.elements).find('.btn-upload');
 
 $btnDelete.click(function() {
-    if (window.confirm('确认删除该管理员吗？')) {
+    if (window.confirm('确认删除该用户吗？')) {
         var id = $(this).data('id');
 
         $

@@ -21,6 +21,9 @@
         <td >{{user.name}}</td>
         <td >{{user.username}}</td>
         <td class="operations">
+          <a class="btn btn-xs btn-default" href="/admin/users/{{user.id}}/edit">
+            修改
+          </a>
           <a class="btn btn-xs btn-primary btn-delete" data-id="{{user.id}}">
             删除
           </a>
