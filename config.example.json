@@ -8,6 +8,11 @@
     "host": "0.0.0.0",
     "port": 3008
   },
+  "ldap": {
+      "host": "localhost",
+      "port": 1389,
+      "path": "./ldap/"
+  },
   "mongodb": "mongodb://localhost/ics",
   "redis": {
     "host": "localhost",
