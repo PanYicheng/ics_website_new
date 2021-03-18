@@ -5,11 +5,20 @@ var BPromise = require('bluebird');
 
 var UserSchema = mongoose.Schema({
     name: String,
+    username: {
+        type: String,
+        unique: true
+    },
+    password: String,
     createdTime: Date,
     level: {
         type: Number,
         default: 1
     },
+    dn: {
+        type: String,
+        unique: true
+    }
 });
 
 UserSchema.statics.random = function(n) {
@@ -18,7 +27,7 @@ UserSchema.statics.random = function(n) {
 
 // Creates username, salt, hash fields
 // see: https://github.com/saintedlama/passport-local-mongoose#options
-UserSchema.plugin(passportLocalMongoose);
+//UserSchema.plugin(passportLocalMongoose);
 
 function random(obj) {
     return {

@@ -15,6 +15,7 @@
     "debug": "^4.3.1",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
+    "ldapjs": "^2.2.4",
     "lodash": "^4.11.1",
     "lorem-ipsum": "^1.0.3",
     "marked": "^0.3.5",
@@ -27,7 +28,8 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "string-format": "^2.0.0"
   },
   "devDependencies": {
     "async": "^2.0.0-rc.4",

@@ -20,7 +20,7 @@ var cleanCSS = require('gulp-clean-css');
 var dirs = {
     client: './bricks/*/{client.js,client/**/*.js}',
     style: './bricks/**/*.less',
-    app: ['./bricks/*/server.js', '*.js', 'config.json', 'models/*.js', 'api/**/*.js'],
+    app: ['./bricks/*/server.js', '*.js', 'config.json', 'models/*.js', 'api/**/*.js', 'ldap/*.js'],
     css: './public/site.css',
     js: './public/site.js',
     view: './bricks/*/view.html'
