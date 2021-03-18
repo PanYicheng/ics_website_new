@@ -43,8 +43,22 @@ Run ics with mongoDB and Redis:
 ```bash
 mongod &
 redis-server &
+sh ldap/gen-cert.sh
+node ldap/ldap-server.js &
 npm start
 ```
+
+gen-cert.sh的时候，common name写ldap-server的url，目前是localhost
+
+编辑portainer的authentication选项，选择ldap选项。LDAP server是上面ldap/ldap-server.js运行的url（host.docker.internal是docker容器指向宿主机所用的域名），password填secret
+
+![image-20210318214300443](./portainer1.png)
+
+![image-20210318214627532](./portainer2.png)
+
+选择save setting保存
+
+初始化时，mongodb中是没有用户的，按照Admin Users中的说明添加第一个user
 
 ## Development
 
