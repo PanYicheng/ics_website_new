@@ -118,9 +118,12 @@ mongoose scheme是一个在mongodb数据库中组织js对象的方式，可以�
 
 # LDAP
 
+LDAP目录是一种有层次的树形结构，它查询速度快，写入性能差，适合做登录认证的业务。市面上的大部分产品都会对LDAP做支持。在ldap-server中可以编写server的add、search、bind等方法，处理相应的接口，具体参考ldapjs官方的文档。
+
+ldap.js: http://ldapjs.org/
+
 portainer官方关于LDAP的文档
 
 - https://documentation.portainer.io/v2.0/auth/ldap/
 - https://www.linkedin.com/pulse/ldap-usersgroups-portainer-neil-cresswell/
 
-ldap.js: http://ldapjs.org/
