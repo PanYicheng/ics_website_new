@@ -3,14 +3,14 @@ var session = require('express-session');
 var User = require('./models/user');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var {validateUser} = require('./ldap/ldap-client')
+var ldapClient = require('./ldap/ldap-client')
 //passport.use(User.createStrategy()); // change this
 passport.use(new LocalStrategy(
     async function(username, password, done) {
      //   if (!user)
        //     return done(null, false);
 
-        var valid = await validateUser(username, password)
+        var valid = await ldapClient.validateUser(username, password)
         if (!valid)
             return done(null, false);
 

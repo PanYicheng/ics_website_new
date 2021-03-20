@@ -3,6 +3,10 @@ const assert = require('assert')
 const fs = require('fs')
 const config = require('../config.json').ldap;
 const format = require('string-format')
+const _ = require('lodash')
+const User = require('../models/user')
+const BPromise = require('bluebird');
+BPromise.promisifyAll(User);
 
 const client = ldap.createClient({
     url: format('ldaps://{host}:{port}', config),
@@ -23,18 +27,14 @@ function bindServer() {
     });
 }
 
-var name = 'test'
-var passwd = '218'
-
 const dn = 'ou=users, o=ics'
-/*
-function addUser(entry) {
-    bindServer();
-    
-    client.add('cn='+entry.username+', '+dn, entry, (err) => {
-        assert.ifError(err);
-    });
-}*/
+
+function addUser(user) {
+    user.dn = 'cn='+user.username+', ou=users, o=ics'
+    const password = user.password
+    user = _.omit(user, 'password')
+    return User.registerAsync(user, password)
+}
 /*
 function findUser(username) {
     bindServer();
@@ -69,7 +69,7 @@ function findUser(username) {
     });
 }*/
 
-function validateUser(username ,password) {
+function validateUser(username, password) {
     return new Promise(resolve => {
         client.bind('cn='+username+', '+dn, password, (err) => {
             if (!err)
@@ -104,7 +104,7 @@ client.del('cn=foo, o=example', (err) => {
 */
 
 module.exports = {
-  //  addUser,
+    addUser,
   //  findUser,
     validateUser
 }

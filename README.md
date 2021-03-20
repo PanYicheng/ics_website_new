@@ -113,3 +113,14 @@ mongoose scheme是一个在mongodb数据库中组织js对象的方式，可以�
 * 查询：调用schema文件的find(obj, selcs, handler)函数，其中obj限定了查询的结果应满足的条件，可以为空;selcs以字符串给出了要提取的属性;handler是处理返回值的函数，参数为(err, docs)
 [gulp]: http://gulpjs.com/
 [brick.js]: https://github.com/brick-js/brick.js
+
+
+
+# LDAP
+
+portainer官方关于LDAP的文档
+
+- https://documentation.portainer.io/v2.0/auth/ldap/
+- https://www.linkedin.com/pulse/ldap-usersgroups-portainer-neil-cresswell/
+
+ldap.js: http://ldapjs.org/

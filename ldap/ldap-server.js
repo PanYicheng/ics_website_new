@@ -16,6 +16,7 @@ function authorize(req, res, next) {
 
 ///--- Globals
 
+//const SUFFIX = 'ou=users, o=ics';
 const SUFFIX = 'o=ics';
 const server = ldap.createServer({
     key: fs.readFileSync(config.ldap.path + 'server-key.pem'),
@@ -65,20 +66,29 @@ server.bind(SUFFIX, async (req, res, next) => {
     const dn = req.dn.toString();
     console.log('BIND: '+dn)
     console.log('BIND: '+req)
-    user = await User.findOne({dn: dn})
-    console.log(user)
 
+    user = await User.findOne({dn: dn})
     if (!user)
         return next(new ldap.NoSuchObjectError(dn));
+
+    console.log(user)
+    return User.authenticate()(user.username, req.credentials, (err, user, info) => {
+        if (err || !user)
+            return next(info)
+        res.end();
+        return next();
+    })
+
+    /*
 
     if (!user.password)
         return next(new ldap.NoSuchAttributeError('Password'));
 
     if (user.password.indexOf(req.credentials) === -1)
         return next(new ldap.InvalidCredentialsError());
-
-    res.end();
-    return next();
+        */
+    //   res.end();
+    // return next();
 });
 
 server.compare(SUFFIX, authorize, (req, res, next) => {
@@ -201,18 +211,12 @@ server.search(SUFFIX, authorize, async (req, res, next) => {
             break;
     }
 
-  //  const keys = Object.keys(db);
-    entries = await User.find()
-    /*  (err, result) => {
-        if (err) {
-            res.end();
-            throw err;
-        }
-        */
+    entries = await User.find({dn: RegExp(dn)})
+   
     for (const entry of entries) {
         console.log("test: ", entry);
         if (!scopeCheck(entry.dn))
-            return;
+            continue;
 
         // mongoose返回的entry不能与ldapjs的filter完美适配
         // 这里打个补丁_.omit

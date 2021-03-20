@@ -3,7 +3,7 @@
 <div>
   <div class="page-header">
     <h3>
-      {% if article %} 编辑账号 {% else %} 创建账号 {% endif %}
+      {% if user %} 编辑账号 {% else %} 创建账号 {% endif %}
     </h3>
   </div>
 
@@ -28,8 +28,12 @@
     <div class="form-group">
       <label for="title" class="control-label">密码</label>
       <input type="text" class="form-control" name="password" id="password"
-          placeholder="123456" value="{{user.password}}">
+          placeholder="123456">
     </div>
+
+    {% if message %}
+    <label class="error">{{message}}</label>
+    {% endif %}
 
     <button type="submit" class="btn btn-primary">提交</button>
   </form>

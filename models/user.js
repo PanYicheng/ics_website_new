@@ -9,7 +9,7 @@ var UserSchema = mongoose.Schema({
         type: String,
         unique: true
     },
-    password: String,
+ //   password: String,
     createdTime: Date,
     level: {
         type: Number,
@@ -27,7 +27,7 @@ UserSchema.statics.random = function(n) {
 
 // Creates username, salt, hash fields
 // see: https://github.com/saintedlama/passport-local-mongoose#options
-//UserSchema.plugin(passportLocalMongoose);
+UserSchema.plugin(passportLocalMongoose);
 
 function random(obj) {
     return {
