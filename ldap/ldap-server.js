@@ -22,7 +22,7 @@ const server = ldap.createServer({
     key: fs.readFileSync(config.ldap.path + 'server-key.pem'),
     certificate: fs.readFileSync(config.ldap.path + 'server-cert.pem'),
 });
-    mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: true });
 
 server.bind('cn=root', (req, res, next) => {
     console.log('BBBBIND:'+ req)
