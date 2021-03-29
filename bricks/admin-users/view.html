@@ -11,6 +11,7 @@
       <tr>
         <th>姓名</th>
         <th>用户名</th>
+        <th>权限</th>
         <th class="operations">操作</th>
       </tr>
       </thead>
@@ -20,6 +21,7 @@
       <tr>
         <td >{{user.name}}</td>
         <td >{{user.username}}</td>
+        <td >{% if user.admin %} 管理员 {% else %} 普通用户{%endif%}</td>
         <td class="operations">
           <a class="btn btn-xs btn-default" href="/admin/users/{{user.id}}/edit">
             修改

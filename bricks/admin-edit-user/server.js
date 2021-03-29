@@ -18,9 +18,7 @@ exports.get = function(req, done, fail) {
 };
 
 exports.post = function(req, done, fail, res) {
-    var user = req.body;
-
-    ldapClient.addUser(user)
+    ldapClient.addUser(req.body)
         .then(x => res.redirect('/admin/users'))
         .catch(err =>  done({message: err.message}));
 };
@@ -32,8 +30,12 @@ exports.put = function(req, done, fail, res) {
         if (err) 
             return err;
         password = req.body.password;
-        Object.assign(user, _.omit(req.body, "password"))
-            .setPassword(password, (err, user) => user.save())
+
+        var obj = Object.assign(user, _.omit(req.body, "password"));
+        if (password) {
+            obj.setPassword(password);
+        } 
+        obj.save();
     })
         .execAsync()
         .then(x => res.redirect(`/admin/users/${id}/edit`))

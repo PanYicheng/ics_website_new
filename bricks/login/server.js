@@ -13,7 +13,7 @@ exports.post = function(req, done, fail, res) {
         }
         req.login(user, function(err) {
             if (err) return fail(err);
-            res.redirect(req.param('next') || '/admin');
+            res.redirect(req.param('next') || '/');
         });
     })(req);
 };

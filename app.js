@@ -15,6 +15,7 @@ var passport = require('./passport');
 var RedisStore = require("connect-redis")(session);
 var api = require('./api');
 var methodOverride = require('method-override');
+var checkLogin = require('./check_login');
 
 var app = express();
 
@@ -52,6 +53,8 @@ app.use(passport.session());
 
 // API
 app.use('/api', api);
+
+app.use('/', checkLogin())
 
 // brick
 var brk = brickJs({
