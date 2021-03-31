@@ -1,0 +1,33 @@
+{% layout 'admin-layout' %}
+
+<div>
+  <div class="page-header">
+    <h3>用户组管理</h3>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th>用户组名</th>
+        <th class="operations">操作</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      {% for group in groups %}
+      <tr>
+        <td >{{group.cn}}</td>
+        <td class="operations">
+          <a class="btn btn-xs btn-default" href="/admin/groups/{{group.id}}/edit">
+            修改
+          </a>
+          <a class="btn btn-xs btn-primary btn-delete" data-id="{{group.id}}">
+            删除
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
+</div>

@@ -2,8 +2,10 @@ const ldap = require('ldapjs');
 const fs = require('fs')
 const config = require('../config.json');
 const User = require('../models/user');
+const Group = require('../models/group');
 const mongoose = require("mongoose")
-const _ = require("lodash")
+const _ = require("lodash");
+
 ///--- Shared handlers
 function authorize(req, res, next) {
     /* Any user may search after bind, only cn=root has full power */
@@ -179,19 +181,20 @@ server.search(SUFFIX, authorize, async (req, res, next) => {
     console.log('SEARCH:'+dn)
 
     let scopeCheck;
+    let db = null;
+    let entries;
+
+    if (req.dn.equals('ou=users, o=ics'))
+        db = User;
+    if (req.dn.equals('ou=groups, o=ics'))
+        db = Group;
+
     switch (req.scope) {
         case 'base':
-            entry = await User.findOne({dn: dn})
-            tmp = _.pickBy(entry, _.isString)
-            if (result && req.filter.matches(tmp)) {
-                res.send({
-                    dn: dn,
-                    attributes: tmp
-                });
-            }          
-
-            res.end();
-            return next();
+            scopeCheck = (k) => {
+                return req.dn.equals(k);
+            };
+            break;
 
         case 'one':
             scopeCheck = (k) => {
@@ -207,25 +210,26 @@ server.search(SUFFIX, authorize, async (req, res, next) => {
             scopeCheck = (k) => {
                 return (req.dn.equals(k) || req.dn.parentOf(k));
             };
-
             break;
     }
 
-    entries = await User.find({dn: RegExp(dn)})
+    if (req.scope == "base")
+        entries = await db.find({dn: dn}).lean();
+    else
+        entries = await db.find({dn: RegExp(dn)}).lean();
    
     for (const entry of entries) {
-        console.log("test: ", entry);
         if (!scopeCheck(entry.dn))
             continue;
+      
+        // 打补丁，去掉空格
+        if (entry.member)
+            entry.member = entry.member.map(dn => dn.replace(/ /g, ""));
 
-        // mongoose返回的entry不能与ldapjs的filter完美适配
-        // 这里打个补丁_.omit
-        tmp = _.pickBy(entry, _.isString)
-
-        if (req.filter.matches(tmp)) {
+        if (req.filter.matches(entry)) {
             res.send({
                 dn: entry.dn,
-                attributes: tmp
+                attributes: entry
             });
         }
     }

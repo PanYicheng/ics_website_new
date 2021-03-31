@@ -3,6 +3,7 @@ const article = require('./article.js');
 const upload = require('./upload.js');
 const user = require('./user.js');
 const job = require('./job.js');
+const group = require('./group.js');
 const debug = require('debug')('ics:api:index');
 
 // REST Modules
@@ -10,6 +11,7 @@ router.use('/articles', article);
 router.use('/upload', upload);
 router.use('/users', user);
 router.use('/job', job);
+router.use('/groups', group);
 
 // Error Handler
 router.use(function(err, req, res, next){

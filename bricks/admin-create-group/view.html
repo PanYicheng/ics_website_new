@@ -1,0 +1,29 @@
+{% layout 'admin-layout' editGroupActive:'active' %}
+
+<div>
+  <div class="page-header">
+    <h3>
+       创建用户组 
+    </h3>
+  </div>
+
+  <form method="post">
+
+    {% if user %}
+      <input type="hidden" name="_method" value="PUT">
+    {% endif %}
+
+    <div class="form-group">
+      <label for="title" class="control-label">用户组名</label>
+      <input type="text" class="form-control" name="cn" id="cn"
+          placeholder="group1">
+    </div>
+
+    {% if message %}
+    <label class="error">{{message}}</label>
+    {% endif %}
+
+    <button type="submit" class="btn btn-primary">提交</button>
+  </form>
+
+</div>

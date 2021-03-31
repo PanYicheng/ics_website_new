@@ -5,8 +5,11 @@ const config = require('../config.json').ldap;
 const format = require('string-format')
 const _ = require('lodash')
 const User = require('../models/user')
+const Group = require('../models/group')
 const BPromise = require('bluebird');
+
 BPromise.promisifyAll(User);
+BPromise.promisifyAll(Group);
 
 const client = ldap.createClient({
     url: format('ldaps://{host}:{port}', config),
@@ -35,6 +38,12 @@ function addUser(user) {
     user = _.omit(user, 'password')
     return User.registerAsync(user, password)
 }
+
+function addGroup(group) {
+    group.dn = 'cn='+group.name+', ou=groups, o=ics'
+    return Group.createAsync(group)
+}
+
 /*
 function findUser(username) {
     bindServer();
@@ -106,5 +115,6 @@ client.del('cn=foo, o=example', (err) => {
 module.exports = {
     addUser,
   //  findUser,
-    validateUser
+    validateUser,
+    addGroup,
 }

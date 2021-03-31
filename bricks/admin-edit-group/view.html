@@ -1,0 +1,41 @@
+{% layout 'admin-layout' %}
+
+<div>
+  <div class="page-header">
+      <h3>用户组编辑: {{group.name}}</h3>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th>组成员名</th>
+        <th class="operations">操作</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      {% for dn in group.member %}
+      <tr>
+        <td >{{dn}}</td>
+        <td class="operations">
+            <a class="btn btn-xs btn-primary btn-delete" data-id="{{group.id}}" data-dn="{{dn}}">
+            删除
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+
+    </table>
+    <form method="post">
+        <div class="form-group"> 
+            <label for="title" class="control-label">add用户</label>
+            <input type="text" class="form-control" name="username" id="username"
+             placeholder="zhangsan">
+        </div>
+        {% if message %}
+        <label class="error">{{message}}</label>
+        {% endif %}
+        <button type="submit" class="btn btn-primary">提交</button>
+    </form>
+  </div>
+</div>
