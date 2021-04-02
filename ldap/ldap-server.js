@@ -44,11 +44,6 @@ server.add(SUFFIX, authorize, (req, res, next) => {
     //    return next(new ldap.EntryAlreadyExistsError(dn));
 
     user = req.toObject().attributes;
-    // 补丁
-    if (user.username instanceof Array)
-        user.username = user.username[0];
-    if (user.password instanceof Array)
-        user.password = user.password[0];
 
     user.dn = dn
     console.log(user)
@@ -81,16 +76,6 @@ server.bind(SUFFIX, async (req, res, next) => {
         return next();
     })
 
-    /*
-
-    if (!user.password)
-        return next(new ldap.NoSuchAttributeError('Password'));
-
-    if (user.password.indexOf(req.credentials) === -1)
-        return next(new ldap.InvalidCredentialsError());
-        */
-    //   res.end();
-    // return next();
 });
 
 server.compare(SUFFIX, authorize, (req, res, next) => {
@@ -249,7 +234,5 @@ async function test() {
     var pwd= "228";
    // addUser(name, pwd);
   //  var user = await findUser(name);
-    //console.log("RRR:",user);
-   // console.log(await validateUser(name, pwd));
 }
 //test()

@@ -33,14 +33,14 @@ function bindServer() {
 const dn = 'ou=users, o=ics'
 
 function addUser(user) {
-    user.dn = 'cn='+user.username+', ou=users, o=ics'
+    user.dn = `cn=${user.username}, ou=users, o=ics`
     const password = user.password
     user = _.omit(user, 'password')
     return User.registerAsync(user, password)
 }
 
 function addGroup(group) {
-    group.dn = 'cn='+group.name+', ou=groups, o=ics'
+    group.dn = `cn=${group.name}, ou=groups, o=ics`
     return Group.createAsync(group)
 }
 
