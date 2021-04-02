@@ -5,6 +5,7 @@ const User = require('../models/user');
 const Group = require('../models/group');
 const mongoose = require("mongoose")
 const _ = require("lodash");
+const debug = require('debug')('ics:ldap-server');
 
 ///--- Shared handlers
 function authorize(req, res, next) {
@@ -16,6 +17,10 @@ function authorize(req, res, next) {
     return next();
 }
 
+function log(req, type) {
+    debug(type+': '+req.dn.toString());
+    debug(req.toString());
+}
 ///--- Globals
 
 //const SUFFIX = 'ou=users, o=ics';
@@ -26,10 +31,10 @@ const server = ldap.createServer({
 });
 mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: true });
 
-server.bind('cn=root', (req, res, next) => {
-    console.log('BBBBIND:'+ req)
-    console.log(req.dn.toString())
-    if (req.dn.toString() !== 'cn=root' || req.credentials !== 'secret')
+server.bind(config.ldap.readerdn, (req, res, next) => {
+    log(req, "BBBIND");
+    if (req.dn.toString() !== config.ldap.readerdn || 
+        req.credentials   !== config.ldap.password)
         return next(new ldap.InvalidCredentialsError());
 
     res.end();
@@ -61,14 +66,13 @@ server.add(SUFFIX, authorize, (req, res, next) => {
 
 server.bind(SUFFIX, async (req, res, next) => {
     const dn = req.dn.toString();
-    console.log('BIND: '+dn)
-    console.log('BIND: '+req)
+    log(req, "BIND");
 
     user = await User.findOne({dn: dn})
     if (!user)
         return next(new ldap.NoSuchObjectError(dn));
 
-    console.log(user)
+    debug(user)
     return User.authenticate()(user.username, req.credentials, (err, user, info) => {
         if (err || !user)
             return next(info)
@@ -161,9 +165,8 @@ server.modify(SUFFIX, authorize, (req, res, next) => {
 });
 
 server.search(SUFFIX, authorize, async (req, res, next) => {
-    console.log('SEARCH:'+req)
     const dn = req.dn.toString();
-    console.log('SEARCH:'+dn)
+    log(req, "SEARCH");
 
     let scopeCheck;
     let db = null;

@@ -1,5 +1,4 @@
 const _ = require('lodash');
-const debug = require('debug')('ics:admin-user');
 const Group = require('../../models/group.js');
 
 exports.url = '/admin/groups';

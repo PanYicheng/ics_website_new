@@ -11,7 +11,9 @@
   "ldap": {
       "host": "localhost",
       "port": 1389,
-      "path": "./ldap/"
+      "path": "./ldap/",
+      "readerdn": "cn=root",
+      "password": "secret"
   },
   "mongodb": "mongodb://localhost/ics",
   "redis": {
