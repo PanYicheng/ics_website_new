@@ -1,5 +1,4 @@
 const Group = require('../../models/group.js');
-const debug = require('debug')('ics:admin-edit-group');
 const ldapClient = require('../../ldap/ldap-client')
 const _ = require("lodash")
 exports.url = ['/admin/create-group'];
