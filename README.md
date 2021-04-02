@@ -50,13 +50,15 @@ npm start
 
 gen-cert.sh的时候，common name写ldap-server的url，目前是localhost
 
-编辑portainer的authentication选项，选择ldap选项。LDAP server是上面ldap/ldap-server.js运行的url（host.docker.internal是docker容器指向宿主机所用的域名），password填secret
+编辑portainer的authentication选项，选择ldap选项。LDAP server是上面ldap/ldap-server.js运行的url（host.docker.internal是docker容器指向宿主机所用的域名），ReaderDN和Password与config.json中保持一致
 
-![image-20210318214300443](./portainer1.png)
+![](./portainer1.png)
+
+user/group search的选项一样填就行了
 
 ![image-20210318214627532](./portainer2.png)
 
-选择save setting保存
+![image-20210318214627532](./portainer3.png)选择save setting保存
 
 初始化时，mongodb中是没有用户的，按照Admin Users中的说明添加第一个user
 
