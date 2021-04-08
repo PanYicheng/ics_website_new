@@ -6,6 +6,7 @@ exports.url = '/login';
 
 exports.post = function(req, done, fail, res) {
     passport.authenticate('local', function(err, user, info) {
+        debug("Received a login request from user", user)
         if (err || !user) {
             return done({
                 message: '用户名或密码不正确'

@@ -1,32 +1,36 @@
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var User = require('./models/user');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var ldapClient = require('./ldap/ldap-client')
+var cookieParser = require("cookie-parser");
+var session = require("express-session");
+const debug = require("debug")("ics:passport");
+var User = require("./models/user");
+var passport = require("passport");
+var LocalStrategy = require("passport-local").Strategy;
+var ldapClient = require("./ldap/ldap-client");
+
 //passport.use(User.createStrategy()); // change this
-passport.use(new LocalStrategy(
-    async function(username, password, done) {
-     //   if (!user)
-       //     return done(null, false);
+passport.use(
+  new LocalStrategy(
+    function (username, password, done) {
+        debug(`passport is authenticating ${username} with ${password}.`);
+        ldapClient.validateUser(username, password).then(
+          valid => {
+            if (!valid) {
+              done(null, false);
+            }
+            User.findOne({ username: username }).then(
+              user => done(null, user));
+          }
+        )
+  })
+);
 
-        var valid = await ldapClient.validateUser(username, password)
-        if (!valid)
-            return done(null, false);
-
-        var user = await User.findOne({username: username});
-        return done(null, user);
-    }
-));
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
     done(err, user);
   });
 });
 
 module.exports = passport;
-

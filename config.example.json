@@ -9,7 +9,7 @@
     "port": 3008
   },
   "ldap": {
-      "host": "localhost",
+      "host": "ics.pku.edu.cn",
       "port": 1389,
       "path": "./ldap/",
       "readerdn": "cn=root",

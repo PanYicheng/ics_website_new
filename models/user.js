@@ -10,7 +10,7 @@ var UserSchema = mongoose.Schema({
         unique: true
     },
  //   password: String,
-    createdTime: Date,
+    createdTime: { type: Date, default: Date.now },
     level: {
         type: Number,
         default: 1

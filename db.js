@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+mongoose.set('useCreateIndex', true);
 var config = require('./config.json');
 var debug = require('debug')('ics:db');
 var db = mongoose.connection;

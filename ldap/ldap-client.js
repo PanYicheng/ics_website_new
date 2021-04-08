@@ -1,6 +1,7 @@
 const ldap = require('ldapjs');
 const assert = require('assert')
 const fs = require('fs')
+const debug = require("debug")("ics:ldap-client");
 const config = require('../config.json').ldap;
 const format = require('string-format')
 const _ = require('lodash')
@@ -23,6 +24,7 @@ const client = ldap.createClient({
 
 client.on('error', (err) => {
     // handle connection error
+    debug("LDAP client error.")
 })
 function bindServer() {
     client.bind('cn=root', 'secret', (err) => {
@@ -36,7 +38,13 @@ function addUser(user) {
     user.dn = `cn=${user.username}, ou=users, o=ics`
     const password = user.password
     user = _.omit(user, 'password')
-    return User.registerAsync(user, password)
+    return User.registerAsync(user, password, function(err) {
+        if (err) {
+          debug(`error while user ${user} register! ${err}`)
+          return err;
+        }
+        debug(`user ${user} registered!`)
+    })
 }
 
 function addGroup(group) {
@@ -44,7 +52,7 @@ function addGroup(group) {
     return Group.createAsync(group)
 }
 
-/*
+
 function findUser(username) {
     bindServer();
     const opts = {
@@ -76,7 +84,7 @@ function findUser(username) {
             });
         })
     });
-}*/
+}
 
 function validateUser(username, password) {
     return new Promise(resolve => {
@@ -114,7 +122,7 @@ client.del('cn=foo, o=example', (err) => {
 
 module.exports = {
     addUser,
-  //  findUser,
+    findUser,
     validateUser,
     addGroup,
 }
