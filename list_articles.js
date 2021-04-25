@@ -1,5 +1,6 @@
-const mongoose=require("mongoose");
-const Article=require('./models/article.js')
+const mongoose = require("mongoose");
+const Article = require('./models/article.js');
+const config = require("./config.json");
 
 mongoose.set('bufferCommands', false);
 mongoose.set('useCreateIndex', true)
@@ -9,7 +10,7 @@ mongoose.connection.on('error', err => {
   console.log(err);
 });
 
-mongoose.connect("mongodb://localhost/ics", { useNewUrlParser: true, useUnifiedTopology: true }).then(
+mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: true }).then(
     () => {
         var q = Article.find({}, function(err, docs) {
             if(err) {

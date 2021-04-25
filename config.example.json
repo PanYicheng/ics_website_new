@@ -9,15 +9,15 @@
     "port": 3008
   },
   "ldap": {
-      "host": "localhost",
+      "host": "ldap",
       "port": 1389,
       "path": "./ldap/",
       "readerdn": "cn=root",
       "password": "secret"
   },
-  "mongodb": "mongodb://localhost/ics",
+  "mongodb": "mongodb://mongodb/ics",
   "redis": {
-    "host": "localhost",
+    "host": "redis",
     "port": 6379
   },
   "livereload": 35748,

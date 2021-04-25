@@ -1,0 +1,44 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: always
+    expose: 
+      - 27017
+    volumes:
+      - ~/demo/data:/data/db # 映射数据
+      - ./mongodb.conf:/data/configdb/mongodb.conf # 配置文件
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    expose: 
+      - 6379
+
+  ldap:
+    image: ldap
+    container_name: ldap
+    restart: always
+    build:
+      context: .
+      dockerfile: ldap/Dockerfile
+    depends_on:
+      - mongodb
+    expose:
+      - 1389
+    ports:
+      - 1389:1389
+
+  app:
+    image: website
+    container_name: app
+    build: .
+    restart: always
+    depends_on:
+      - redis
+      - mongodb
+      - ldap
+    ports:
+      - 3008:3008
