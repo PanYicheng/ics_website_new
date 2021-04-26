@@ -8,7 +8,7 @@ services:
       - 27017
     volumes:
       - ~/demo/data:/data/db # 映射数据
-      - ./mongodb.conf:/data/configdb/mongodb.conf # 配置文件
+      - ~/demo/backup:/data/backup # 映射备份数据
 
   redis:
     image: redis:latest
