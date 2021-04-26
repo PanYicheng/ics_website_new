@@ -48,6 +48,8 @@ var sessionMiddleware = session({
     store: new RedisStore(config.redis)
 });
 app.use(sessionMiddleware);
+
+//passport
 app.use(passport.initialize());
 app.use(passport.session());
 

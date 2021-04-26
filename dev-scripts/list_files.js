@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const File = require('./models/file.js')
 const User = require("./models/user.js")
+const config = require('./config.json');
 
 mongoose.set('bufferCommands', false);
 mongoose.set('useCreateIndex', true)
@@ -10,7 +11,7 @@ mongoose.connection.on('error', err => {
     console.log(err);
 });
 
-mongoose.connect("mongodb://localhost/ics", { useNewUrlParser: true, useUnifiedTopology: true }).then(
+mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: true }).then(
     () => {
         var icsUser
         User.findOne({name: "王平"}, function (err, user) {

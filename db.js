@@ -14,7 +14,7 @@ db.on('error', e => {
     debug('connect error: ', e);
 });
 db.once('open', function () {
-    debug('connected');
+    debug('connected to mongodb: ', config.mongodb);
 });
 
 if (config.mongodb) {
