@@ -8,6 +8,6 @@ COPY models models
 COPY config.json .
 COPY package*.json .
 RUN npm install
-EXPOSE 1379
+EXPOSE 1389
 CMD node ldap/ldap-server.js
 
