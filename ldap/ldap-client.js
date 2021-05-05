@@ -23,6 +23,7 @@ const client = ldap.createClient({
 
 client.on('error', (err) => {
     // handle connection error
+    assert.ifError(err);
 })
 function bindServer() {
     client.bind('cn=root', 'secret', (err) => {
@@ -118,3 +119,13 @@ module.exports = {
     validateUser,
     addGroup,
 }
+
+async function test() {
+    var username = "tettst";
+    var password= "228";
+    var name = username;
+    addUser({username, password, name});
+    var v = await validateUser(username, password);
+    console.log(v);
+}
+//test()
