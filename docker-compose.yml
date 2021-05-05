@@ -9,6 +9,9 @@ services:
     volumes:
       - ~/demo/data:/data/db # 映射数据
       - ~/demo/backup:/data/backup # 映射备份数据
+    ports:
+      - 27017:27017
+    network_mode: host
 
   redis:
     image: redis:latest
@@ -16,6 +19,9 @@ services:
     restart: always
     expose: 
       - 6379
+    ports:
+      - 6379:6379
+    network_mode: host
 
   ldap:
     image: ldap
@@ -30,6 +36,7 @@ services:
       - 1389
     ports:
       - 1389:1389
+    network_mode: host
 
   app:
     image: website
@@ -42,3 +49,4 @@ services:
       - ldap
     ports:
       - 3008:3008
+    network_mode: host

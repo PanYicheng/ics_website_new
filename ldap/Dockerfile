@@ -5,9 +5,8 @@ WORKDIR /app
 RUN mkdir ldap models
 COPY ldap ldap
 COPY models models
-COPY config.json .
-COPY package*.json .
+COPY config.json ./
+COPY package*.json ./
 RUN npm install
 EXPOSE 1389
-CMD node ldap/ldap-server.js
-
+CMD DEBUG=ics:* node ldap/ldap-server.js
