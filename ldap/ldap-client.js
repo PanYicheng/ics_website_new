@@ -15,9 +15,7 @@ BPromise.promisifyAll(Group);
 const client = ldap.createClient({
     url: format('ldaps://{host}:{port}', config),
     tlsOptions: {
-    //    key: fs.readFileSync('client-key.pem'),
-      //  cert: fs.readFileSync('client-cert.pem'),
-        ca: [fs.readFileSync(config.path + 'server-cert.pem')],
+        ca: [fs.readFileSync(config.path + 'ca-cert.pem')],
         rejectUnauthorized: true
     }
 });
@@ -25,6 +23,7 @@ const client = ldap.createClient({
 client.on('error', (err) => {
     // handle connection error
     debug("LDAP client error.")
+    assert.ifError(err);
 })
 function bindServer() {
     client.bind('cn=root', 'secret', (err) => {
@@ -125,4 +124,19 @@ module.exports = {
     findUser,
     validateUser,
     addGroup,
+}
+
+async function test() {
+    var username = "tettst";
+    var password= "228";
+    var name = username;
+    var res = await addUser({username, password, name});
+    console.log(res);
+    var v = await validateUser(username, password);
+    console.log(v);
+}
+
+var argu = process.argv;
+if (argu[2] == "test") {
+    test()
 }

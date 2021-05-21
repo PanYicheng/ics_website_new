@@ -229,13 +229,3 @@ server.search(SUFFIX, authorize, async (req, res, next) => {
 server.listen(config.ldap.port, () => {
     console.log('LDAP server up at: %s', server.url);
 });
-
-
-async function test() {
-    const {addUser, findUser, validateUser} = require("./ldap-client");
-    var name = "test";
-    var pwd= "228";
-   // addUser(name, pwd);
-  //  var user = await findUser(name);
-}
-//test()

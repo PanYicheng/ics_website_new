@@ -41,11 +41,9 @@ vim config.json   # make configurations as needed
 Run ics with mongoDB and Redis:
 
 ```bash
-mongod &
-redis-server &
 sh ldap/gen-cert.sh
-node ldap/ldap-server.js &
-npm start
+docker-compose build
+docker-compose up
 ```
 
 gen-cert.sh的时候，common name写ldap-server的url，目前是localhost
@@ -100,7 +98,14 @@ Update admin users:
 
 
 ## 网站架构
-网站使用node编写，也使用node运行，见runWeb.sh和package.json。node的http服务默认监听在3008端口，如果要修改可以修改config.json的express项下的内容；同时网站需要redis server作为数据支持，默认端口在6379上，也在config.json中配置。 
+网站使用node编写，也使用node运行，见runWeb.sh和package.json。node的http服务默认监听在3008端口，如果要修改可以修改config.json的express项下的内容；同时网站需要redis server作为数据支持，默认端口在6379上，也在config.json中配置。
+
+## 数据备份
+
+mongodb-backup.sh可以手动实现数据备份，或者使用watch定时备份
+
+`watch -n 3600 sh ./mongodb-backup.sh`
+
 ## 运行
 采用systemctl的service运行网站，这样就可以支持自动重启服务。
 ## 修改网页
@@ -128,4 +133,3 @@ portainer官方关于LDAP的文档
 
 - https://documentation.portainer.io/v2.0/auth/ldap/
 - https://www.linkedin.com/pulse/ldap-usersgroups-portainer-neil-cresswell/
-

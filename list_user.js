@@ -23,5 +23,19 @@ mongoose.connection.on('error', err => {
   console.log(err);
 });
 
-mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: true }).then(
+    () => {
+        var q = User.find({}, function(err, users) {
+            if(err) {
+                console.log(err);
+                return;
+            }
+            for(const user of users){
+                console.log(user.name, user._id);
+            }
+            
+        })
+    },
+    err => {console.log(err);}
+)
 
